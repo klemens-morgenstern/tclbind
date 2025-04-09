@@ -5,7 +5,7 @@ if(BOOST_SUPERPROJECT_VERSION)
     set(TCLBIND_VERSION ${BOOST_SUPERPROJECT_VERSION})
 endif()
 
-project(boost_tcl VERSION "${TCLBIND_VERSION}" LANGUAGES CXX)
+project(tclbind VERSION "${TCLBIND_VERSION}" LANGUAGES CXX)
 
 set(TCLBIND_IS_ROOT OFF)
 
@@ -26,9 +26,9 @@ if(TCLBIND_IS_ROOT)
     include(CTest)
 endif()
 if(NOT BOOST_SUPERPROJECT_VERSION)
-    option(TCLBIND_INSTALL "Install tclbind files" ON)
-    option(TCLBIND_BUILD_TESTS "Build tclbind tests" ${BUILD_TESTING})
-    option(TCLBIND_BUILD_EXAMPLES "Build tclbind examples" ${TCLBIND_IS_ROOT})
+    option(TCLBIND_INSTALL "Install tclbindd files" ON)
+    option(TCLBIND_BUILD_TESTS "Build tclbindd tests" ${BUILD_TESTING})
+    option(TCLBIND_BUILD_EXAMPLES "Build tclbindd examples" ${TCLBIND_IS_ROOT})
 else()
     set(TCLBIND_BUILD_TESTS ${BUILD_TESTING})
 endif()
@@ -55,12 +55,11 @@ endif()
 find_package(TCL)
 find_package(TclStub)
 
-add_library(boost_tcl INTERFACE)
-target_include_directories(boost_tcl INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
-add_library(Boost::tcl ALIAS boost_tcl)
+add_library(tclbind INTERFACE)
+target_include_directories(tclbind INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 if(TCLBIND_INSTALL AND NOT BOOST_SUPERPROJECT_VERSION)
-    install(TARGETS boost_tcl
+    install(TARGETS tclbind
             RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
             LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
             ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
